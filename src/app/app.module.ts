@@ -16,11 +16,13 @@ import { YelpService } from './yelp.service';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [YelpService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: KeyInterceptorService,
-    multi: true
-  }],
+  providers: [YelpService,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: KeyInterceptorService,
+    //   multi: true
+    // }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
