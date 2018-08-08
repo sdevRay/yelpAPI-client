@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http"
-import { KeyInterceptorService } from "../app/interceptor/key.interceptor.service"
+import { KeyInterceptorService } from "./interceptor/key.interceptor.service"
 
-import { YelpService } from './yelp.service';
+import { YelpService } from './service/yelp.service';
 
 @NgModule({
   declarations: [
@@ -17,11 +17,11 @@ import { YelpService } from './yelp.service';
     HttpClientModule
   ],
   providers: [YelpService,
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: KeyInterceptorService,
-    //   multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: KeyInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

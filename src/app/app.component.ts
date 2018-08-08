@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { YelpService } from './yelp.service';
+import { YelpService } from './service/yelp.service';
+import { Businesses } from "./model/businesses"
+
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,8 @@ import { YelpService } from './yelp.service';
 })
 export class AppComponent implements OnInit {
 
-  public businesses = [];
+  public Businesses = [];
+  public returnedData = [];
   public errorMsg;
 
   title = 'yelpAPI-client';
@@ -17,8 +20,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.yelpService.getBusinesses()
-      .subscribe(data => this.businesses = data,
-                 error => this.errorMsg = error);
-    console.log(this.businesses)
+      .subscribe(data => {
+      this.returnedData = data
+      console.log(this.returnedData)
+      },
+        error => this.errorMsg = error);
   }
 }
