@@ -11,13 +11,14 @@ export class YelpService {
 
   private corsURL = "https://cors-anywhere.herokuapp.com/"
   // private baseURL = "https://api.yelp.com/v3/businesses/search?term=delis&location=47362";
-  private baseURL = "https://api.yelp.com/v3/businesses/search?term=1&location=47362";
+  private baseURL = "https://api.yelp.com/v3/businesses";
   private _url: string = "/assets/data/businesses.json";
 
   constructor(private http: HttpClient) { }
 
-  getBusinesses(): Observable<any> {
+  getBusinesses(pricePoint, zipCode): Observable<any> {
     // return this.http.get<Businesses[]>(this._url)
-    return this.http.get(this.corsURL + this.baseURL)
+    return this.http.get(`${this.corsURL}${this.baseURL}/search?price=${pricePoint}&location=${zipCode}`);
   }
 }
+

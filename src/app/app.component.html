@@ -1,5 +1,33 @@
 <h1>Business details</h1>
-<div *ngIf="errorMsg"><h3>{{errorMsg}}</h3></div>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+  Value: {{ userForm.value | json }}
+
+
+  <mat-form-field>
+    <input matInput placeholder="zip code" formControlName="zipCode" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <!-- <input matInput placeholder="price" formControlName="pricePoint"/> -->
+  
+    <mat-select placeholder="Price Point" (ngModel)="selectedValue" name="price">
+      <mat-option *ngFor="let price of pricePoints" [value]=price.value>
+        {{price.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-button color="primary" type="submit">Submit</button>
+
+</form>
+
+
+
+<div *ngIf="errorMsg">
+  <h3>{{errorMsg}}</h3>
+</div>
 <!-- <ul *ngFor="let data of returnedData">
   <li>{{data.rating}}</li>
 </ul> -->

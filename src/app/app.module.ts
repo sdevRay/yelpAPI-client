@@ -8,13 +8,25 @@ import { KeyInterceptorService } from "./interceptor/key.interceptor.service"
 
 import { YelpService } from './service/yelp.service';
 
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule, MatSelectModule } from "@angular/material";
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule
   ],
   providers: [YelpService,
     {
