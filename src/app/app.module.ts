@@ -8,11 +8,13 @@ import { KeyInterceptorService } from "./interceptor/key.interceptor.service"
 
 import { YelpService } from './service/yelp.service';
 
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatInputModule } from "@angular/material/input";
-import { MatButtonModule, MatSelectModule } from "@angular/material";
+import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCardModule } from "@angular/material";
+
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
+
 
 @NgModule({
   declarations: [
@@ -22,11 +24,14 @@ import { MatButtonModule, MatSelectModule } from "@angular/material";
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
-    FormsModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [YelpService,
     {

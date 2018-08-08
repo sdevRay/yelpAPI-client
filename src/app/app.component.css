@@ -1,0 +1,14 @@
+.form-container {
+  display: flex;
+  flex-direction: row;
+}
+  
+.form-container > * {
+  width: 100%;
+}
+
+mat-card img{
+  object-fit: cover; 
+  width: 10%; 
+  height: 10%;
+}

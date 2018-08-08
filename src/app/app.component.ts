@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { YelpService } from './service/yelp.service';
 import { Businesses } from "./model/businesses";
 
-import { FormBuilder, FormGroup, Validators } from "@angular/forms"
+import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms"
 
 export interface PricePoint {
   value: number;
@@ -14,49 +14,63 @@ export interface PricePoint {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
 
+
+  public userInputForm: FormGroup;
+
   pricePoints: PricePoint[] = [
-    {value: 1, viewValue: "$"},
-    {value: 2, viewValue: "$$"},
-    {value: 3, viewValue: "$$$"},
-    {value: 4, viewValue: "$$$$"}
+    { value: 1, viewValue: "$" },
+    { value: 2, viewValue: "$$" },
+    { value: 3, viewValue: "$$$" },
+    { value: 4, viewValue: "$$$$" }
   ];
 
-  public selectedValue: string;
+  states: string[] = [
+    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+    'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+    'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+    'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+  ];
+
+  public selectedOption: string;
   public returnedData = [];
   public errorMsg;
-
-  userForm: FormGroup;
+  public spinner: boolean = false;
 
   title = 'yelpAPI-client';
 
-  constructor(private fb: FormBuilder, private yelpService: YelpService) { 
-
+  constructor(private fb: FormBuilder, private yelpService: YelpService) {
+    this.createForm();
   }
+
+  createForm(): void {
+    this.userInputForm = this.fb.group({
+      pricePoint: new FormControl("", [Validators.required]),
+      city: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
+      state: new FormControl("", [Validators.required])
+    })
+  }
+
+  
 
   ngOnInit() {
-    this.userForm = this.fb.group({
-      zipCode: [null,[
-        Validators.required,
-        Validators.min(5),
-        Validators.max(5)
-      ]],
-      // pricePoint: ""
-    });
-    this.userForm.valueChanges.subscribe(console.log);
-    console.log(this.selectedValue)
+    // this.onSubmit(this.pricePoint, this.city, this.state)
   }
 
-  onSubmit(): void{
-    // console.log(this.userForm.value.pricePoint);
 
-    this.yelpService.getBusinesses(this.userForm.value.pricePoint, this.selectedValue)
-    .subscribe(data => {
-      this.returnedData = data.businesses
-    },
-      error => this.errorMsg = error);
 
+  onSubmit(): void {
+    this.yelpService.getBusinesses(this.userInputForm.value.pricePoint, this.userInputForm.value.city, this.userInputForm.value.state)
+      .subscribe(data => {
+        this.returnedData = data.businesses
+        console.log(this.returnedData)
+      },
+        error => this.errorMsg = error);
   }
 
 }
