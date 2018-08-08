@@ -1,5 +1,9 @@
 <h1>Business details</h1>
 <div *ngIf="errorMsg"><h3>{{errorMsg}}</h3></div>
 <!-- <ul *ngFor="let data of returnedData">
-  <li>{{data.id}}</li>
+  <li>{{data.rating}}</li>
 </ul> -->
+<div *ngFor="let data of returnedData">
+  <h2>{{data.name}}</h2>
+  <h2>{{data.price}}</h2>
+</div>

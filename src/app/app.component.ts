@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { YelpService } from './service/yelp.service';
+import { Businesses } from "./model/businesses";
+
 
 
 @Component({
@@ -17,11 +19,18 @@ export class AppComponent implements OnInit {
   constructor(private yelpService: YelpService) { }
 
   ngOnInit() {
-    this.yelpService.getBusinesses()
-      .subscribe(data => {
-      this.returnedData = data
-      console.log(this.returnedData)
-      },
-        error => this.errorMsg = error);
+    this.getLocalBusiness();
   }
+
+  getLocalBusiness(){
+    this.yelpService.getBusinesses()
+    .subscribe(data => {
+      this.returnedData = data.businesses
+    },
+      error => this.errorMsg = error);
+  }
+
+
 }
+
+

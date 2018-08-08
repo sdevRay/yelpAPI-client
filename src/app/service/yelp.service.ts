@@ -1,30 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from "rxjs/operators";
-import { HttpHeaders } from "@angular/common/http"
-import { Businesses } from "../model/businesses"
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Businesses } from '../model/businesses';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class YelpService {
 
-  private url = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=delis&location=47362";
+  private corsURL = "https://cors-anywhere.herokuapp.com/"
+  // private baseURL = "https://api.yelp.com/v3/businesses/search?term=delis&location=47362";
+  private baseURL = "https://api.yelp.com/v3/businesses/search?term=1&location=47362";
   private _url: string = "/assets/data/businesses.json";
 
   constructor(private http: HttpClient) { }
 
-  getBusinesses(): Observable<Businesses[]>{
-    // return this.http.get<any[]>(this._url)
-    return this.http.get<Businesses[]>(this.url)
-    
-    // A pipe takes in data as input and transforms it to a desired output. 
-    .pipe(catchError(this.errorHandler));
+  getBusinesses(): Observable<any> {
+    // return this.http.get<Businesses[]>(this._url)
+    return this.http.get(this.corsURL + this.baseURL)
   }
-
-  errorHandler(error: HttpErrorResponse){
-    return throwError(error.message || "Server Error");
-  }
-
 }
