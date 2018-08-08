@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { YelpService } from './service/yelp.service';
-import { Businesses } from "./model/businesses"
 
 
 @Component({
@@ -10,7 +9,6 @@ import { Businesses } from "./model/businesses"
 })
 export class AppComponent implements OnInit {
 
-  public Businesses = [];
   public returnedData = [];
   public errorMsg;
 
