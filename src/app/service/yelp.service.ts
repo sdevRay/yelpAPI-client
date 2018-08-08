@@ -10,7 +10,7 @@ import { Businesses } from "../model/businesses"
 })
 export class YelpService {
 
-  private url = "https://api.yelp.com/v3/businesses/search?term=delis&latitude=37.786882&longitude=-122.399972";
+  private url = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=delis&location=47362";
   private _url: string = "/assets/data/businesses.json";
 
   constructor(private http: HttpClient) { }
