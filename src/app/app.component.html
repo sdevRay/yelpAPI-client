@@ -2,25 +2,26 @@
   <h1>Randomized Feast</h1>
   <h6>Powered by the Yelp API</h6>
 </div>
-
-<form class="form-container" [formGroup]="userInputForm" (ngSubmit)="onSubmit()">
-  <mat-form-field hideRequiredMarker>
-    <mat-select placeholder="Price Point" formControlName="pricePoint" required>
-      <mat-option>--</mat-option>
-      <mat-option *ngFor="let price of pricePoints" [value]="price.value">{{price.viewValue}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field hideRequiredMarker>
-    <input matInput formControlName="city" placeholder="City" pattern="[a-zA-Z ]*" required>
-  </mat-form-field>
-  <mat-form-field hideRequiredMarker>
-    <mat-select placeholder="State" formControlName="state" required>
-      <mat-option>--</mat-option>
-      <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button class="btn" mat-raised-button color="primary" type="submit" [disabled]="!userInputForm.valid">Randomize</button>
-</form>
+<div class="parentWrapper">
+  <form class="form-container" [formGroup]="userInputForm" (ngSubmit)="onSubmit()">
+    <mat-form-field hideRequiredMarker>
+      <mat-select placeholder="Price Point" formControlName="pricePoint" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let price of pricePoints" [value]="price.value">{{price.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field hideRequiredMarker>
+      <input matInput formControlName="city" placeholder="City" pattern="[a-zA-Z ]*" required>
+    </mat-form-field>
+    <mat-form-field hideRequiredMarker>
+      <mat-select placeholder="State" formControlName="state" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button class="btn" mat-raised-button color="primary" type="submit" [disabled]="!userInputForm.valid">Randomize</button>
+  </form>
+</div>
 
 <div class="showAllBtnDiv" *ngIf="showAll">
   <button class="btn" mat-raised-button color="primary" (click)="onShowAll()">Show All</button>

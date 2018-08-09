@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { YelpService } from './service/yelp.service';
 import { Businesses } from "./model/businesses";
 
@@ -15,7 +15,7 @@ export interface PricePoint {
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   public userInputForm: FormGroup;
 
@@ -58,10 +58,10 @@ export class AppComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-  }
-
   onSubmit(): void {
+    if(this.showAll){
+      this.showAll = false;
+    }
     this.spinner = true;
     this.yelpService.getBusinesses(this.userInputForm.value.pricePoint, this.userInputForm.value.city, this.userInputForm.value.state)
       .subscribe(data => {
@@ -75,7 +75,6 @@ export class AppComponent implements OnInit {
   }
 
   onShowAll(){
-    console.log("Show All");
     this.showAll = false;
   }
 
