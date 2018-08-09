@@ -1,42 +1,50 @@
 <form class="form-container" [formGroup]="userInputForm" (ngSubmit)="onSubmit()">
-  <mat-form-field hideRequiredMarker>
-    <mat-select placeholder="Price Point" formControlName="pricePoint" required>
-      <mat-option>--</mat-option>
-      <mat-option *ngFor="let price of pricePoints" [value]="price.value">{{price.viewValue}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field hideRequiredMarker>
-    <input matInput formControlName="city" placeholder="City" pattern="[a-zA-Z ]*" required>
-  </mat-form-field>
-  <mat-form-field hideRequiredMarker>
-    <mat-select placeholder="State" formControlName="state" required>
-      <mat-option>--</mat-option>
-      <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button class="submitBtn" mat-raised-button color="green" type="submit" [disabled]="!userInputForm.valid">Submit</button>
+
+    <mat-form-field hideRequiredMarker>
+      <mat-select placeholder="Price Point" formControlName="pricePoint" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let price of pricePoints" [value]="price.value">{{price.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field hideRequiredMarker>
+      <input matInput formControlName="city" placeholder="City" pattern="[a-zA-Z ]*" required>
+    </mat-form-field>
+
+    <mat-form-field hideRequiredMarker>
+      <mat-select placeholder="State" formControlName="state" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button class="submitBtn" mat-raised-button color="primary" type="submit" [disabled]="!userInputForm.valid">Submit</button>
+
 </form>
 
 
+<!-- HTTP REQUEST ERROR HANDLER -->
 <h1>Business details</h1>
 <div *ngIf="errorMsg">
   <h3>{{errorMsg}}</h3>
 </div>
 
-<div *ngIf="spinner">
+<div fxLayoutAlign="center" *ngIf="spinner">
   <mat-spinner></mat-spinner>
 </div>
 
 <div *ngIf="!spinner">
   <mat-card *ngFor="let data of returnedData">
-    <mat-card-title>{{data.name}}</mat-card-title>
+
+    <mat-card-title>
+      <a href="{{data.url}}" target="_blank">{{data.name}}</a>
+    </mat-card-title>
     <mat-card-subtitle>
-      Subtitles
+      <img src="../assets/yelp_stars/web_and_ios/regular/regular_{{data.rating}}.png">
     </mat-card-subtitle>
 
-    <img src="../assets/yelp_stars/web_and_ios/regular/regular_{{data.rating}}.png">
 
-    <mat-card-content>
+    <mat-card-content class="floatRight">
       {{data.display_phone}} {{data.location.address1}} {{data.location.city}}, {{data.location.state}} {{data.tran}}
       <div *ngIf="data.transactions.length > 0">
         <div *ngFor="let transaction of data.transactions">

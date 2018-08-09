@@ -14,7 +14,7 @@ import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInput
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-
+import { FlexLayoutModule } from "@angular/flex-layout"
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     ReactiveFormsModule,
     MatSelectModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FlexLayoutModule
   ],
   providers: [YelpService,
     {

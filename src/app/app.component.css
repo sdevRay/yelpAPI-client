@@ -1,16 +1,33 @@
 .form-container {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+  /* display: inline;
+  text-align: center;
+  margin: auto 0;
+  margin: 2em;
+
+  justify-content: center; */
 }
   
-.submitBtn {
-  border-radius: 0 10px 10px 0;
+/* .center {
+  margin: auto;
 }
 
-mat-card img{
+.submitBtn {
+  border-radius: 10px 10px 10px 10px;
+}
+
+.floatRight {
+  float: right;
+  overflow: auto;
+}
+
+mat-card {
+  border-radius: 10px;
+  margin: 10px;
+}
+
+mat-card img {
   object-fit: cover; 
   width: 10%; 
   height: 10%;
-}
+} */
 
