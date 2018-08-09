@@ -13,21 +13,27 @@
 
 .submitBtn {
   border-radius: 10px 10px 10px 10px;
-}
-
-.floatRight {
-  float: right;
-  overflow: auto;
-}
-
-mat-card {
-  border-radius: 10px;
-  margin: 10px;
-}
-
-mat-card img {
-  object-fit: cover; 
-  width: 10%; 
-  height: 10%;
 } */
 
+
+
+mat-card {
+ padding: 0.5em;
+ margin: 1em;
+ width: 25%;
+}
+
+.img_url {
+  /* display: inline;
+  margin: 1em; */
+  border-radius: 0.5em;
+  margin: 0 auto;
+  background-size: cover;
+  width: 100%; 
+  height: 25%;
+}
+
+
+.transaction {
+  color: green;
+}

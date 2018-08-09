@@ -10,7 +10,7 @@ import { YelpService } from './service/yelp.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCardModule } from "@angular/material";
+import { MatGridListModule, MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCardModule } from "@angular/material";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
@@ -32,7 +32,8 @@ import { FlexLayoutModule } from "@angular/flex-layout"
     MatSelectModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatGridListModule
   ],
   providers: [YelpService,
     {
