@@ -56,18 +56,15 @@ export class AppComponent implements OnInit {
     })
   }
 
-  
-
   ngOnInit() {
-    // this.onSubmit(this.pricePoint, this.city, this.state)
   }
 
-
-
   onSubmit(): void {
+    this.spinner = true;
     this.yelpService.getBusinesses(this.userInputForm.value.pricePoint, this.userInputForm.value.city, this.userInputForm.value.state)
       .subscribe(data => {
         this.returnedData = data.businesses
+        this.spinner = false;
         console.log(this.returnedData)
       },
         error => this.errorMsg = error);

@@ -22,26 +22,38 @@
 </form>
 
 
-
 <h1>Business details</h1>
 <div *ngIf="errorMsg">
   <h3>{{errorMsg}}</h3>
 </div>
 
+<div *ngIf="spinner">
+  <mat-spinner></mat-spinner>
+</div>
 
-<mat-card *ngFor="let data of returnedData">
-    <mat-card-title>{{data.name}}</mat-card-title>		
-    <mat-card-subtitle>STARS</mat-card-subtitle>
-    <mat-card-content>CONTENT</mat-card-content>
+<div *ngIf="!spinner">
+  <mat-card *ngFor="let data of returnedData">
+    <mat-card-title>{{data.name}}</mat-card-title>
+    <mat-card-subtitle>
+      Subtitles
+    </mat-card-subtitle>
+
+    <img src="../assets/yelp_stars/web_and_ios/regular/regular_{{data.rating}}.png">
+
+
+    <img src="https://maps.googleapis.com/maps/api/staticmap?center={{data.coordinates.latitude | number:'2.2-6'}},{{data.coordinates.longitude | number:'2.2-6'}}&zoom=14&size=400x400&key=AIzaSyCEsBpoTkp-UqnyLTYQravhB8QtUuW-K7U">
+
+
+    <mat-card-content>
+      {{data.display_phone}} {{data.location.address1}} {{data.location.city}}, {{data.location.state}} {{data.tran}}
+      <div *ngIf="data.transactions.length > 0">
+        <div *ngFor="let transaction of data.transactions">
+          {{transaction | titlecase}}
+        </div>
+      </div>
+    </mat-card-content>
+
     <img mat-card-image src="{{data.image_url}}">
 
-</mat-card>
-
-<!-- <div *ngFor="let data of returnedData">
-  <h2>{{data.name}}</h2>
-  <h2>{{data.price}}</h2>
-</div> -->
-
-<div *ngIf="spinner">
-<mat-spinner></mat-spinner>
+  </mat-card>
 </div>
