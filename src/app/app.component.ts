@@ -17,7 +17,6 @@ export interface PricePoint {
 
 export class AppComponent implements OnInit {
 
-
   public userInputForm: FormGroup;
 
   pricePoints: PricePoint[] = [
@@ -39,8 +38,11 @@ export class AppComponent implements OnInit {
 
   public selectedOption: string;
   public returnedData = [];
+  public displayData: Object;
   public errorMsg;
   public spinner: boolean = false;
+  public showAll: boolean = false;
+  public randomNumber: number;
 
   title = 'yelpAPI-client';
 
@@ -64,10 +66,21 @@ export class AppComponent implements OnInit {
     this.yelpService.getBusinesses(this.userInputForm.value.pricePoint, this.userInputForm.value.city, this.userInputForm.value.state)
       .subscribe(data => {
         this.returnedData = data.businesses
+        this.randomNumber = this.randomNumberGenerator(this.returnedData.length);
+        this.displayData = this.returnedData[this.randomNumber]
         this.spinner = false;
-        console.log(this.returnedData)
+        this.showAll = true;
       },
         error => this.errorMsg = error);
+  }
+
+  onShowAll(){
+    console.log("Show All");
+    this.showAll = false;
+  }
+
+  randomNumberGenerator(randomNumber): number {
+    return Math.floor((Math.random() * randomNumber) + 0);
   }
 
 }
