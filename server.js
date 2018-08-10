@@ -15,6 +15,7 @@ app.use(require("./middleware/headers"));
 
 // TEST ENDPOINT
 app.use("/api", function(req, res){
+    console.log(req.headers.authorization);
     res.json([]);
 })
 // Start the app by listening on the default Heroku port
