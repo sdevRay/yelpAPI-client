@@ -32,7 +32,7 @@
   <h3>{{errorMsg}}</h3>
 </div>
 
-<div *ngIf="spinner">
+<div *ngIf="spinner && !errorMsg">
   <mat-spinner color="primary" class="centerSpinner"></mat-spinner>
 </div>
 
