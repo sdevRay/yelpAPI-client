@@ -78,8 +78,8 @@ export class AppComponent {
         // this.displayData = this.returnedData[this.randomNumber];
         // this.spinner = false;
         // this.showAll = true;
-      },
-        error => this.errorMsg = error);
+      })
+        // error => this.errorMsg = error);
   }
 
   onShowAll(){
