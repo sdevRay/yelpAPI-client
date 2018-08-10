@@ -4,6 +4,8 @@ import { Businesses } from "./model/businesses";
 
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms"
 
+
+// EXTRACT INTO ITS OWN MODEL
 export interface PricePoint {
   value: number;
   viewValue: string;
@@ -55,7 +57,7 @@ export class AppComponent {
       pricePoint: new FormControl("", [Validators.required]),
       city: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
       state: new FormControl("", [Validators.required])
-    })
+    });
   }
 
   onSubmit(): void {
@@ -64,10 +66,10 @@ export class AppComponent {
     }
     this.spinner = true;
     this.yelpService.getBusinesses(this.userInputForm.value.pricePoint, this.userInputForm.value.city, this.userInputForm.value.state)
-      .subscribe(data => {
-        this.returnedData = data.businesses
+      .subscribe(data => { // TRY TO SHAPE DATA AS BUSINESS
+        this.returnedData = data.businesses;
         this.randomNumber = this.randomNumberGenerator(this.returnedData.length);
-        this.displayData = this.returnedData[this.randomNumber]
+        this.displayData = this.returnedData[this.randomNumber];
         this.spinner = false;
         this.showAll = true;
       },
