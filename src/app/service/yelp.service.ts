@@ -15,7 +15,7 @@ export class YelpService {
   constructor(private http: HttpClient) { }
 
   getBusinesses(pricePoint, city, state): Observable<any> {
-    return this.http.get(`${this.corsURL}${this.baseURL}/search?locale=en_US&limit=50&price=${pricePoint}&location=${city},${state}`);
+    return this.http.get(`${this.baseURL}/search?locale=en_US&limit=50&price=${pricePoint}&location=${city},${state}`);
   }
 }
 
