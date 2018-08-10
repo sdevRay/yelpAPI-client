@@ -12,15 +12,15 @@ export class YelpService {
   private baseURL = "https://api.yelp.com/v3/businesses";
   private _url: string = "/assets/data/businesses.json";
 
-  private serverURL = "https//hundyp-edr-client.herokuapp.com";
+  private serverURL = "https://yelpapi-client.herokuapp.com/";
   private localURL = "http://localhost:4200"
 
   constructor(private http: HttpClient) { }
 
   getBusinesses(pricePoint, city, state): Observable<any> { // TRY TO SHAPE DATA AS BUSINESS
     // return this.http.get(`${this.baseURL}/search?locale=en_US&limit=50&price=${pricePoint}&location=${city},${state}`);
-    // return this.http.get(`${this.localURL}/api`);
     return this.http.get(`${this.serverURL}/api`);
+    // return this.http.get(`${this.serverURL}/api`);
   }
 }
 
