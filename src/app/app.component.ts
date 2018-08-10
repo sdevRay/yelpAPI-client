@@ -71,8 +71,7 @@ export class AppComponent {
       .subscribe(data => { // TRY TO SHAPE DATA AS BUSINESS
         this.returnedAttempt = data;
 
-        console.log(JSON.stringify(this.returnedAttempt));
-        console.log(data);
+        console.log(this.returnedAttempt);
         // this.returnedData = data.businesses;
         // this.randomNumber = this.randomNumberGenerator(this.returnedData.length);
         // this.displayData = this.returnedData[this.randomNumber];
