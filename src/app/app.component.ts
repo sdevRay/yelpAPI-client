@@ -67,7 +67,9 @@ export class AppComponent {
     this.spinner = true;
     this.yelpService.getBusinesses(this.userInputForm.value.pricePoint, this.userInputForm.value.city, this.userInputForm.value.state)
       .subscribe(data => { // TRY TO SHAPE DATA AS BUSINESS
-        console.log(data)
+        this.returnedData = data;
+        
+        console.log(this.returnedData)
         // this.returnedData = data.businesses;
         // this.randomNumber = this.randomNumberGenerator(this.returnedData.length);
         // this.displayData = this.returnedData[this.randomNumber];
