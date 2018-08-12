@@ -13,7 +13,7 @@ export class YelpService {
   private _url: string = "/assets/data/businesses.json";
 
   private serverURL = "https://yelpapi-client.herokuapp.com";
-  private localURL = "http://localhost:5432"
+  private localURL = "http://localhost:3000"
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +22,7 @@ export class YelpService {
 
     // return this.http.get(`${this.localURL}/yelp/${pricePoint}/${city}/${state}`);
 
-    return this.http.get(`${this.localURL}/yelp`)
+    return this.http.get(`${this.localURL}/yelp/test`)
     // return this.http.get(`${this.serverURL}/api`);
   }
 }

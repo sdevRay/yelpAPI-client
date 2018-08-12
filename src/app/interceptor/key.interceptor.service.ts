@@ -13,7 +13,7 @@ export class KeyInterceptorService implements HttpInterceptor {
 
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Authorization": this.yelpKey
+                // "Authorization": this.yelpKey
             })
             
             // headers: req.headers.set('Authorization', `bearer ${this.yelpKey}`)        
