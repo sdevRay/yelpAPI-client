@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpHeaders, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -10,10 +10,14 @@ export class KeyInterceptorService implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         
         const authHeader = req.clone({ 
-            headers: req.headers.set('Authorization', `bearer ${this.yelpKey}`)        
-        });
-        
-        return next.handle(authHeader);
 
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Authorization": this.yelpKey
+            })
+            
+            // headers: req.headers.set('Authorization', `bearer ${this.yelpKey}`)        
+        });       
+        return next.handle(authHeader);
     }
 }

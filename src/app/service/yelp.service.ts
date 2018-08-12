@@ -9,7 +9,7 @@ import { Businesses } from '../model/businesses';
 export class YelpService {
 
   private corsURL = "https://cors-anywhere.herokuapp.com/";
-  private baseURL = "https://api.yelp.com/v3/businesses";
+  private baseURL = "https://api.yelp.com/v3/businesses/search?";
   private _url: string = "/assets/data/businesses.json";
 
   private serverURL = "https://yelpapi-client.herokuapp.com";
@@ -18,8 +18,11 @@ export class YelpService {
   constructor(private http: HttpClient) { }
 
   getBusinesses(pricePoint, city, state): Observable<any> { // TRY TO SHAPE DATA AS BUSINESS
-    // return this.http.get(`${this.baseURL}/search?locale=en_US&limit=50&price=${pricePoint}&location=${city},${state}`);
-    return this.http.get(`${this.localURL}/api`);
+    // return this.http.get(`${this.baseURL}locale=en_US&limit=50&price=${pricePoint}&location=${city},${state}`);
+
+    // return this.http.get(`${this.localURL}/yelp/${pricePoint}/${city}/${state}`);
+
+    return this.http.get(`${this.localURL}/yelp`)
     // return this.http.get(`${this.serverURL}/api`);
   }
 }

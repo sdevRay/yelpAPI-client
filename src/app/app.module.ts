@@ -30,11 +30,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     MatProgressSpinnerModule,
   ],
   providers: [YelpService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: KeyInterceptorService,
-      multi: true
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: KeyInterceptorService,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent]
 })
