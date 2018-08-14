@@ -1,15 +1,8 @@
 import { Component } from '@angular/core';
 import { YelpService } from './service/yelp.service';
-import { Businesses } from "./model/businesses";
-
+import { Business } from "./model/business.model";
+import { PricePoint } from "./model/pricepoint.model"
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms"
-
-
-// EXTRACT INTO ITS OWN MODEL
-export interface PricePoint {
-  value: number;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-root',
@@ -38,17 +31,13 @@ export class AppComponent {
     'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
   ];
 
-  public selectedOption: string;
-  public returnedData = [];
-  public displayData: Object;
-  public errorMsg;
-  public spinner: boolean = false;
-  public showAll: boolean = false;
-  public randomNumber: number;
-
-  returnedAttempt: string;
-
-  title = 'yelpAPI-client';
+  private selectedOption: string;
+  private returnedData: Business[];
+  private errorMsg: string;
+  private spinner: boolean;
+  private showAll: boolean;
+  private randomNumber: number;
+  private returnedAttempt: string;
 
   constructor(private fb: FormBuilder, private yelpService: YelpService) {
     this.createForm();
@@ -63,25 +52,23 @@ export class AppComponent {
   }
 
   onSubmit(): void {
-    if(this.showAll){
+    if (this.showAll) {
       this.showAll = false;
     }
     this.spinner = true;
     this.yelpService.getBusinesses(this.userInputForm.value.pricePoint, this.userInputForm.value.city, this.userInputForm.value.state)
-      .subscribe((data: any) => { // TRY TO SHAPE DATA AS BUSINESS
+      .subscribe((data: Business[]) => { 
         this.returnedData = data;
-        console.log(data);
         console.log(this.returnedData);
-        // this.returnedData = data.businesses;
-        // this.randomNumber = this.randomNumberGenerator(this.returnedData.length);
-        // this.displayData = this.returnedData[this.randomNumber];
-        // this.spinner = false;
+
+        // this.displayData = this.returnedData[this.randomNumberGenerator(this.returnedData.length)];
+        this.spinner = false;
         // this.showAll = true;
       },
         error => this.errorMsg = error);
   }
 
-  onShowAll(){
+  onShowAll() {
     this.showAll = false;
   }
 

@@ -3,13 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http"
-import { KeyInterceptorService } from "./interceptor/key.interceptor.service"
+import { HttpClientModule } from "@angular/common/http"
 import { YelpService } from './service/yelp.service';
 
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCardModule } from "@angular/material";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -29,13 +28,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     MatCardModule,
     MatProgressSpinnerModule,
   ],
-  providers: [YelpService,
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: KeyInterceptorService,
-    //   multi: true
-    // }
-  ],
+  providers: [YelpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
