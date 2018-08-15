@@ -1,30 +1,43 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-    <mat-card>
-      <mat-card-title fxLayout.gt-xs="row" fx.Layout.xs="column">
-  
-        <form class="form-container" [formGroup]="userInputForm" (ngSubmit)="onSubmit()">
-            <mat-form-field hideRequiredMarker>
-              <mat-select placeholder="Price Point" formControlName="pricePoint" required>
-                <mat-option>--</mat-option>
-                <mat-option *ngFor="let price of pricePoints" [value]="price.value">{{price.viewValue}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field hideRequiredMarker>
-              <input matInput formControlName="city" placeholder="City" pattern="[a-zA-Z ]*" required>
-            </mat-form-field>
-            <mat-form-field hideRequiredMarker>
-              <mat-select placeholder="State" formControlName="state" required>
-                <mat-option>--</mat-option>
-                <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <button class="btn" mat-raised-button color="primary" type="submit" [disabled]="!userInputForm.valid">Welp</button>
-          </form>
+  <mat-card>
+    <mat-card-title fxLayout.gt-xs="row" fx.Layout.xs="column">
+
+      <form class="form-container" [formGroup]="userInputForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field hideRequiredMarker>
+          <div fxFlex="25%">
+            <mat-select placeholder="Price Point" formControlName="pricePoint" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let price of pricePoints" [value]="price.value">{{price.viewValue}}</mat-option>
+            </mat-select>
+          </div>
+          </mat-form-field>
+
+          <mat-form-field hideRequiredMarker>
+          <div fxFlex="25%">
+            <input matInput formControlName="city" placeholder="City" pattern="[a-zA-Z ]*" required>
+          </div>
+          </mat-form-field>
+
+          <mat-form-field hideRequiredMarker>
+          <div fxFlex="25%">
+            <mat-select placeholder="State" formControlName="state" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+            </mat-select>
+          </div>
+          </mat-form-field>
+
+        <div fxFlex="25%">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!userInputForm.valid">Welp</button>
+        </div>
+
+      </form>
 
 
-      </mat-card-title>
-    </mat-card> 
-  </div>
+    </mat-card-title>
+  </mat-card>
+</div>
 
 
 <div class="title">
