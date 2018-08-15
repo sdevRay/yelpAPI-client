@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from "@angular/common/http"
 import { YelpService } from './service/yelp.service';
 
+import { FlexLayoutModule } from "@angular/flex-layout"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCardModule } from "@angular/material";
+import { MatDividerModule, MatGridListModule, MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatCardModule } from "@angular/material";
 
 
 @NgModule({
@@ -27,6 +28,9 @@ import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInput
     MatSelectModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatGridListModule,
+    MatDividerModule,
+    FlexLayoutModule
   ],
   providers: [YelpService],
   bootstrap: [AppComponent]

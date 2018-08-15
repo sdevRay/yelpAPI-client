@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { YelpService } from './service/yelp.service';
 import { Business } from "./model/business.model";
-import { PricePoint } from "./model/pricepoint.model"
-import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms"
+import { PricePoint } from "./model/pricepoint.model";
+import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -31,13 +31,10 @@ export class AppComponent {
     'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
   ];
 
-  private selectedOption: string;
+  private selectedOption: Business;
   private returnedData: Business[];
   private errorMsg: string;
   private spinner: boolean;
-  private showAll: boolean;
-  private randomNumber: number;
-  private returnedAttempt: string;
 
   constructor(private fb: FormBuilder, private yelpService: YelpService) {
     this.createForm();
@@ -52,24 +49,13 @@ export class AppComponent {
   }
 
   onSubmit(): void {
-    if (this.showAll) {
-      this.showAll = false;
-    }
     this.spinner = true;
     this.yelpService.getBusinesses(this.userInputForm.value.pricePoint, this.userInputForm.value.city, this.userInputForm.value.state)
-      .subscribe((data: Business[]) => { 
+      .subscribe((data: Business[]) => {
         this.returnedData = data;
-        console.log(this.returnedData);
-
-        // this.displayData = this.returnedData[this.randomNumberGenerator(this.returnedData.length)];
+        this.selectedOption = this.returnedData[this.randomNumberGenerator(this.returnedData.length)];
         this.spinner = false;
-        // this.showAll = true;
-      },
-        error => this.errorMsg = error);
-  }
-
-  onShowAll() {
-    this.showAll = false;
+      }, err => this.errorMsg = err)
   }
 
   randomNumberGenerator(randomNumber): number {

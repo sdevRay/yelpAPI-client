@@ -1,6 +1,35 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <mat-card>
+      <mat-card-title fxLayout.gt-xs="row" fx.Layout.xs="column">
+  
+        <form class="form-container" [formGroup]="userInputForm" (ngSubmit)="onSubmit()">
+            <mat-form-field hideRequiredMarker>
+              <mat-select placeholder="Price Point" formControlName="pricePoint" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let price of pricePoints" [value]="price.value">{{price.viewValue}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field hideRequiredMarker>
+              <input matInput formControlName="city" placeholder="City" pattern="[a-zA-Z ]*" required>
+            </mat-form-field>
+            <mat-form-field hideRequiredMarker>
+              <mat-select placeholder="State" formControlName="state" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button class="btn" mat-raised-button color="primary" type="submit" [disabled]="!userInputForm.valid">Welp</button>
+          </form>
+
+
+      </mat-card-title>
+    </mat-card> 
+  </div>
+
+
 <div class="title">
   <h1>Welp</h1>
-  <h6>Powered by the Yelp API</h6>
+  <h6>Find a random local restaurant. Powered by the Yelp API</h6>
 </div>
 <div class="parentWrapper">
   <form class="form-container" [formGroup]="userInputForm" (ngSubmit)="onSubmit()">
@@ -23,10 +52,6 @@
   </form>
 </div>
 
-<div class="showAllBtnDiv" *ngIf="showAll">
-  <button class="btn" mat-raised-button color="primary" (click)="onShowAll()">Show All</button>
-</div>
-
 <!-- HTTP REQUEST ERROR HANDLER -->
 <div *ngIf="errorMsg">
   <h3>{{errorMsg}}</h3>
@@ -36,66 +61,49 @@
   <mat-spinner color="primary" class="centerSpinner"></mat-spinner>
 </div>
 
-<!-- <div *ngIf="!spinner && showAll">
-  <mat-card *ngIf="displayData">
-    <div class="row">
-      <div class="column">
-        <img class="img_url" mat-card-image src="{{displayData.image_url}}">
-      </div>
-      <div class="column">
-        <mat-card-title>
-          <h1>
-            <a href="{{displayData.url}}" target="_blank">{{displayData.name}}</a>
-          </h1>
-        </mat-card-title>
-        <mat-card-subtitle>
-          <img src="../assets/yelp_stars/web_and_ios/regular/regular_{{displayData.rating}}.png">
-        </mat-card-subtitle>
-        <mat-card-content>
-          <h3>
-            <p>{{displayData.display_phone}}</p>
-            <p>{{displayData.location.address1}}</p> {{displayData.location.city}}, {{displayData.location.state}}</h3>
-          <div *ngIf="displayData.transactions.length > 0">
-            <div class="transaction" *ngFor="let transaction of displayData.transactions">
-              {{transaction | titlecase}}
-            </div>
-          </div>
-        </mat-card-content>
-      </div>
-    </div>
-  </mat-card>
-</div>
--->
 
-<!-- <div *ngIf="!spinner && !showAll">
-  <mat-card *ngFor="let data of returnedData">
-    <div class="row">
-      <div class="column">
-        <img class="img_url" mat-card-image src="{{data.image_url}}">
-      </div>
-      <div class="column">
-        <mat-card-title>
-          <h1>
-            <a href="{{data.url}}" target="_blank">{{data.name}}</a>
-          </h1>
-        </mat-card-title>
-        <mat-card-subtitle>
-          <img src="../assets/yelp_stars/web_and_ios/regular/regular_{{data.rating}}.png">
-        </mat-card-subtitle>
-        <mat-card-content>
-          <h3>
-            <p>{{data.display_phone}}</p>
-            <p>{{data.location.address1}}</p> {{data.location.city}}, {{data.location.state}}</h3>
-          <div *ngIf="data.transactions.length > 0">
-            <div class="transaction" *ngFor="let transaction of data.transactions">
-              {{transaction | titlecase}}
+<mat-card *ngIf="selectedOption && !spinner">
+  <mat-grid-list cols="2" rowHeight="1:0.5">
+    <mat-grid-tile>
+
+      <div class="card-container">
+        <mat-card-header>
+
+          <mat-card-title>
+            <div class="card-heading">
+              <a href="{{selectedOption.url}}" target="_blank">{{selectedOption.name}}</a>
             </div>
+          </mat-card-title>
+
+          <mat-card-subtitle>
+            <p>{{selectedOption.display_phone}}</p>
+            <img src="../assets/yelp_stars/web_and_ios/regular/regular_{{selectedOption.rating}}.png">
+          </mat-card-subtitle>
+
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <div *ngFor="let loc of selectedOption.location.display_address">
+            {{loc}}
           </div>
+
+          <div *ngFor="let trans of selectedOption.transactions">
+            <div class="card-transaction">{{trans | titlecase}}</div>
+          </div>
+
         </mat-card-content>
       </div>
-    </div>
-  </mat-card>
-</div>  -->
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <img mat-card-image src="{{selectedOption.image_url}}" alt="{{selectedOption.name}}">
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</mat-card>
+
+
 
 <!-- Google map 
     <img src="https://maps.googleapis.com/maps/api/staticmap?center={{data.coordinates.latitude | number:'2.2-6'}},{{data.coordinates.longitude | number:'2.2-6'}}&zoom=14&size=400x400&key=AIzaSyCEsBpoTkp-UqnyLTYQravhB8QtUuW-K7U"> -->
