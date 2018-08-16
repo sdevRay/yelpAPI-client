@@ -1,69 +1,36 @@
-<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-  <mat-card>
-    <mat-card-title fxLayout.gt-xs="row" fx.Layout.xs="column">
-
-      <form class="form-container" [formGroup]="userInputForm" (ngSubmit)="onSubmit()">
-
-        <mat-form-field hideRequiredMarker>
-          <div fxFlex="25%">
-            <mat-select placeholder="Price Point" formControlName="pricePoint" required>
-              <mat-option>--</mat-option>
-              <mat-option *ngFor="let price of pricePoints" [value]="price.value">{{price.viewValue}}</mat-option>
-            </mat-select>
-          </div>
-          </mat-form-field>
-
-          <mat-form-field hideRequiredMarker>
-          <div fxFlex="25%">
-            <input matInput formControlName="city" placeholder="City" pattern="[a-zA-Z ]*" required>
-          </div>
-          </mat-form-field>
-
-          <mat-form-field hideRequiredMarker>
-          <div fxFlex="25%">
-            <mat-select placeholder="State" formControlName="state" required>
-              <mat-option>--</mat-option>
-              <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-            </mat-select>
-          </div>
-          </mat-form-field>
-
-        <div fxFlex="25%">
-          <button mat-raised-button color="primary" type="submit" [disabled]="!userInputForm.valid">Welp</button>
-        </div>
-
-      </form>
-
-
-    </mat-card-title>
-  </mat-card>
-</div>
-
-
 <div class="title">
   <h1>Welp</h1>
-  <h6>Find a random local restaurant. Powered by the Yelp API</h6>
+  <h6>
+    Find a random restaurant. Powered by the Yelp API.
+  </h6>
 </div>
-<div class="parentWrapper">
-  <form class="form-container" [formGroup]="userInputForm" (ngSubmit)="onSubmit()">
-    <mat-form-field hideRequiredMarker>
-      <mat-select placeholder="Price Point" formControlName="pricePoint" required>
-        <mat-option>--</mat-option>
-        <mat-option *ngFor="let price of pricePoints" [value]="price.value">{{price.viewValue}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field hideRequiredMarker>
-      <input matInput formControlName="city" placeholder="City" pattern="[a-zA-Z ]*" required>
-    </mat-form-field>
-    <mat-form-field hideRequiredMarker>
-      <mat-select placeholder="State" formControlName="state" required>
-        <mat-option>--</mat-option>
-        <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button class="btn" mat-raised-button color="primary" type="submit" [disabled]="!userInputForm.valid">Welp</button>
-  </form>
-</div>
+
+<form class="form-container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0"
+  [formGroup]="userInputForm" (ngSubmit)="onSubmit()">
+
+  <mat-form-field inFlex="25%" hideRequiredMarker>
+    <mat-select placeholder="Price Point" formControlName="pricePoint" required>
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let price of pricePoints" [value]="price.value">{{price.viewValue}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field inFlex="25%" hideRequiredMarker>
+    <input matInput formControlName="city" placeholder="City" pattern="[a-zA-Z ]*" required>
+  </mat-form-field>
+
+  <mat-form-field inFlex="25%" hideRequiredMarker>
+    <mat-select placeholder="State" formControlName="state" required>
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button class="form-button" inFlex="25%" mat-raised-button color="primary" type="submit" [disabled]="!userInputForm.valid">Welp</button>
+</form>
+
+
+
 
 <!-- HTTP REQUEST ERROR HANDLER -->
 <div *ngIf="errorMsg">
@@ -71,12 +38,42 @@
 </div>
 
 <div *ngIf="spinner && !errorMsg">
-  <mat-spinner color="primary" class="centerSpinner"></mat-spinner>
+  <mat-spinner color="primary" class="spinner"></mat-spinner>
 </div>
 
 
+<mat-card class="card-container" *ngIf="selectedOption && !spinner">
+  <div class="layout-container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="5em" fxLayoutGap.xs="0">
+    <div fxFlex="50%" class="content-container">
+      <mat-card-header>
+        <mat-card-title>
+          <div class="card-heading">
+            <a href="{{selectedOption.url}}" target="_blank">{{selectedOption.name}}</a>
+          </div>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <p>{{selectedOption.display_phone}}</p>
+          <img src="../assets/yelp_stars/web_and_ios/regular/regular_{{selectedOption.rating}}.png">
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngFor="let loc of selectedOption.location.display_address">
+          {{loc}}
+        </div>
+        <div *ngFor="let trans of selectedOption.transactions">
+          <div class="card-transaction">{{trans | titlecase}}</div>
+        </div>
+      </mat-card-content>
+    </div>
+    <div fxFlex="50%" class="image-container">
+      <img mat-card-image class="image" src="{{selectedOption.image_url}}" alt="{{selectedOption.name}}">
+    </div>
+  </div>
+</mat-card>
+
+<!-- 
 <mat-card *ngIf="selectedOption && !spinner">
-  <mat-grid-list cols="2" rowHeight="1:0.5">
+  <mat-grid-list cols="2" rowHeight="1:1S" >
     <mat-grid-tile>
 
       <div class="card-container">
@@ -114,8 +111,8 @@
     </mat-grid-tile>
 
   </mat-grid-list>
-</mat-card>
 
+</mat-card> -->
 
 
 <!-- Google map 
