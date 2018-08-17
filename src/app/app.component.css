@@ -18,21 +18,6 @@
   margin: 5em auto;
 }
 
-
-.card-container {
-  margin: auto;
-  border-radius: 2em;
-  display: inline-flex;
-
-}
-
-.layout-container {
-}
-
-.content-container {
-
-}
-
 .card-heading {
   font-size: 2em;
 }
@@ -43,15 +28,21 @@
 }
 
 .image-container {
-
-  padding-top: 1.5em;
+  /* float: left; */
+  /* margin: 1em 1em 0em 1em; */
+  /* margin: 1em; */
+  /* overflow:auto; */
 }
 
 .image {
   border-radius: 1em;
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
+  margin: 1em;
+  /* padding: 1em; */
+  /* margin: 1em; */
+  /* width: 100%; */
+  /* width: 100%;
+  height: 100%; */
+  /* margin: 0 auto; */
   max-width: 25em;
   max-height: 25em;
 }

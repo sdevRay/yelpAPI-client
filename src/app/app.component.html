@@ -8,29 +8,26 @@
 <form class="form-container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0"
   [formGroup]="userInputForm" (ngSubmit)="onSubmit()">
 
-  <mat-form-field inFlex="25%" hideRequiredMarker>
+  <mat-form-field hideRequiredMarker>
     <mat-select placeholder="Price Point" formControlName="pricePoint" required>
       <mat-option>--</mat-option>
       <mat-option *ngFor="let price of pricePoints" [value]="price.value">{{price.viewValue}}</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field inFlex="25%" hideRequiredMarker>
+  <mat-form-field hideRequiredMarker>
     <input matInput formControlName="city" placeholder="City" pattern="[a-zA-Z ]*" required>
   </mat-form-field>
 
-  <mat-form-field inFlex="25%" hideRequiredMarker>
+  <mat-form-field hideRequiredMarker>
     <mat-select placeholder="State" formControlName="state" required>
       <mat-option>--</mat-option>
       <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <button class="form-button" inFlex="25%" mat-raised-button color="primary" type="submit" [disabled]="!userInputForm.valid">Welp</button>
+  <button class="form-button" mat-raised-button color="primary" type="submit" [disabled]="!userInputForm.valid">Welp</button>
 </form>
-
-
-
 
 <!-- HTTP REQUEST ERROR HANDLER -->
 <div *ngIf="errorMsg">
@@ -42,77 +39,26 @@
 </div>
 
 
-<mat-card class="card-container" *ngIf="selectedOption && !spinner">
-  <div class="layout-container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="5em" fxLayoutGap.xs="0">
-    <div fxFlex="50%" class="content-container">
-      <mat-card-header>
-        <mat-card-title>
-          <div class="card-heading">
-            <a href="{{selectedOption.url}}" target="_blank">{{selectedOption.name}}</a>
-          </div>
-        </mat-card-title>
-        <mat-card-subtitle>
-          <p>{{selectedOption.display_phone}}</p>
-          <img src="../assets/yelp_stars/web_and_ios/regular/regular_{{selectedOption.rating}}.png">
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div *ngFor="let loc of selectedOption.location.display_address">
-          {{loc}}
-        </div>
-        <div *ngFor="let trans of selectedOption.transactions">
-          <div class="card-transaction">{{trans | titlecase}}</div>
-        </div>
-      </mat-card-content>
-    </div>
-    <div fxFlex="50%" class="image-container">
-      <img mat-card-image class="image" src="{{selectedOption.image_url}}" alt="{{selectedOption.name}}">
-    </div>
-  </div>
-</mat-card>
+  <div class="card-wrapper" style="border: 1px solid black;" *ngIf="selectedOption && !spinner" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
 
-<!-- 
-<mat-card *ngIf="selectedOption && !spinner">
-  <mat-grid-list cols="2" rowHeight="1:1S" >
-    <mat-grid-tile>
-
-      <div class="card-container">
-        <mat-card-header>
-
-          <mat-card-title>
-            <div class="card-heading">
-              <a href="{{selectedOption.url}}" target="_blank">{{selectedOption.name}}</a>
-            </div>
-          </mat-card-title>
-
-          <mat-card-subtitle>
-            <p>{{selectedOption.display_phone}}</p>
-            <img src="../assets/yelp_stars/web_and_ios/regular/regular_{{selectedOption.rating}}.png">
-          </mat-card-subtitle>
-
-        </mat-card-header>
-
-        <mat-card-content>
-
-          <div *ngFor="let loc of selectedOption.location.display_address">
-            {{loc}}
-          </div>
-
-          <div *ngFor="let trans of selectedOption.transactions">
-            <div class="card-transaction">{{trans | titlecase}}</div>
-          </div>
-
-        </mat-card-content>
+    <div>
+      <a class="card-heading" href="{{selectedOption.url}}" target="_blank">{{selectedOption.name}}</a>
+      <p>{{selectedOption.display_phone}}</p>
+      <img src="../assets/yelp_stars/web_and_ios/regular/regular_{{selectedOption.rating}}.png">
+      <div *ngFor="let loc of selectedOption.location.display_address">
+        {{loc}}
       </div>
-    </mat-grid-tile>
+      <div *ngFor="let trans of selectedOption.transactions">
+        <div class="card-transaction">{{trans | titlecase}}</div>
+      </div>
+    </div>
 
-    <mat-grid-tile>
-      <img mat-card-image src="{{selectedOption.image_url}}" alt="{{selectedOption.name}}">
-    </mat-grid-tile>
+    <div class="image-container" >
+    <img class="image" src="{{selectedOption.image_url}}" alt="{{selectedOption.name}}">
+    </div>
 
-  </mat-grid-list>
+  </div>
 
-</mat-card> -->
 
 
 <!-- Google map 

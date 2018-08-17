@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { YelpService } from './service/yelp.service';
 import { Business } from "./model/business.model";
 import { PricePoint } from "./model/pricepoint.model";
