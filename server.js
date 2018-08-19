@@ -7,8 +7,8 @@ const app = express();
 const fetch = require("node-fetch");
 
 // Serve only the static files from the dist directory
-// app.use(express.static(__dirname + "/dist/yelpAPI-client"));
-app.use(express.static(__dirname + "/yelpAPI-client"));
+app.use(express.static(__dirname + "/dist/yelpAPI-client"));
+// app.use(express.static(__dirname + "/yelpAPI-client"));
 
 app.use(function(req, res, next){
     res.header('access-control-allow-origin', '*');
@@ -34,14 +34,13 @@ app.get('/yelp/:pricePoint/:cityState', (req, res) => {
 });
 
 // Send all requests to index.html
-// app.get("*", function(req, res) {
-//     res.sendFile(path.join(__dirname + "/dist/yelpAPI-client/index.html"));
-// });
-
-// Send all requests to index.html
 app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname + "/src/index.html"));
+    res.sendFile(path.join(__dirname + "/dist/yelpAPI-client/index.html"));
 });
+
+// app.get("*", function(req, res) {
+//     res.sendFile(path.join(__dirname + "/src/index.html"));
+// });
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 5432, function(){

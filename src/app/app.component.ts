@@ -12,16 +12,14 @@ import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms"
 
 export class AppComponent {
 
-  public userInputForm: FormGroup;
-
-  pricePoints: PricePoint[] = [
+  private pricePoints: PricePoint[] = [
     { value: 1, viewValue: "$" },
     { value: 2, viewValue: "$$" },
     { value: 3, viewValue: "$$$" },
     { value: 4, viewValue: "$$$$" }
   ];
-
-  states: string[] = [
+  
+  private states: string[] = [
     'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
     'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
     'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
@@ -30,7 +28,8 @@ export class AppComponent {
     'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
     'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
   ];
-
+  
+  private userInputForm: FormGroup;
   private selectedOption: Business;
   private returnedData: Business[];
   private errorMsg: string;
@@ -40,7 +39,7 @@ export class AppComponent {
     this.createForm();
   }
 
-  createForm(): void {
+  private createForm(): void {
     this.userInputForm = this.fb.group({
       pricePoint: new FormControl("", [Validators.required]),
       city: new FormControl("", [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
@@ -48,7 +47,7 @@ export class AppComponent {
     });
   }
 
-  onSubmit(): void {
+  private onSubmit(): void {
     this.spinner = true;
     this.yelpService.getBusinesses(this.userInputForm.value.pricePoint, this.userInputForm.value.city, this.userInputForm.value.state)
       .subscribe((data: Business[]) => {
@@ -58,7 +57,7 @@ export class AppComponent {
       }, err => this.errorMsg = err)
   }
 
-  randomNumberGenerator(randomNumber): number {
+  private randomNumberGenerator(randomNumber): number {
     return Math.floor((Math.random() * randomNumber) + 0);
   }
 
