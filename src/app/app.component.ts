@@ -12,14 +12,14 @@ import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms"
 
 export class AppComponent {
 
-  private pricePoints: PricePoint[] = [
+  public pricePoints: PricePoint[] = [
     { value: 1, viewValue: "$" },
     { value: 2, viewValue: "$$" },
     { value: 3, viewValue: "$$$" },
     { value: 4, viewValue: "$$$$" }
   ];
   
-  private states: string[] = [
+  public states: string[] = [
     'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
     'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
     'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
@@ -30,10 +30,10 @@ export class AppComponent {
   ];
   
   public userInputForm: FormGroup;
-  private selectedOption: Business;
-  private returnedData: Business[];
-  private errorMsg: string;
-  private spinner: boolean;
+  public selectedOption: Business;
+  public returnedData: Business[];
+  public errorMsg: string;
+  public spinner: boolean;
 
   constructor(private fb: FormBuilder, private yelpService: YelpService) {
     this.createForm();
@@ -47,7 +47,7 @@ export class AppComponent {
     });
   }
 
-  private onSubmit(): void {
+  public onSubmit(): void {
     this.spinner = true;
     this.yelpService.getBusinesses(this.userInputForm.value.pricePoint, this.userInputForm.value.city, this.userInputForm.value.state)
       .subscribe((data: Business[]) => {
