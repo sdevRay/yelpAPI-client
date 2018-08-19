@@ -29,7 +29,7 @@ export class AppComponent {
     'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
   ];
   
-  private userInputForm: FormGroup;
+  public userInputForm: FormGroup;
   private selectedOption: Business;
   private returnedData: Business[];
   private errorMsg: string;
